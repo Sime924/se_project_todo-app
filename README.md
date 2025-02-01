@@ -1,17 +1,31 @@
 # Simple Todo App
 
-Give a brief description of the project here. Feel free to give it a different name.
+This application is a basic TODO app. it allows the user to keep track of tasks & set deadlines for them.
 
 ## Functionality
 
-Give a more detailed explanation of the project and its functionality.
+users can add new task using the the interactive ADD TODO button.
+
+also check them off with a checkbox to mark completion.
+
+users can delete tasks using the delete button marked in red next to each task.
+
+product had Modal that provides month, date & year for tasks needing deadlines.
 
 ## Technology
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+HTML
+CSS
+JavaScript
+
+Adaptive buttons and checkboxs
+
+Responsive modal inputs w/ error messaging.
+
+Hover effects over buttons
 
 ## Deployment
 
 This project is deployed on GitHub Pages:
 
-- ADD LINK HERE
+[- ADD LINK HERE](https://sime924.github.io/se_project_todo-app/)
