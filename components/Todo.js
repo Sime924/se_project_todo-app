@@ -31,6 +31,7 @@ class Todo {
         day: "numeric",
       })}`;
     }
+    console.log(_getDueDate());
   }
 
   getView() {
@@ -40,6 +41,16 @@ class Todo {
 
     const todoNameEl = this._todoElement.querySelector(".todo__name");
     const todoDate = this._todoElement.querySelector(".todo__date");
+    const formattedDate = new Date(this._data.date).toLocaleDateString(
+      "en-US",
+      {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      }
+    );
+    todoDate.textContent = `Due: ${formattedDate}`;
+
     this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
 
     todoNameEl.textContent = this._data.name;
