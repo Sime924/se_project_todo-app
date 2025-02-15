@@ -16,6 +16,7 @@ const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
   handleFormSubmit: () => {},
 });
+addTodoPopup.setEventListeners();
 
 const section = new Section({
   items: [], //pass inital todos
@@ -39,9 +40,9 @@ const renderTodo = (item) => {
 //modal.classList.add("popup_visible");
 //};
 
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
+//const closeModal = (modal) => {
+//modal.classList.remove("popup_visible");
+//};
 
 const generateTodo = (data) => {
   const todo = new Todo(data, "#todo-template");
@@ -53,9 +54,9 @@ addTodoButton.addEventListener("click", () => {
   addTodoPopup.open();
 });
 
-addTodoCloseBtn.addEventListener("click", () => {
-  closeModal(addTodoPopupEl);
-});
+//addTodoCloseBtn.addEventListener("click", () => {
+//addTodoPopup.close();
+//});
 
 addTodoForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -69,7 +70,7 @@ addTodoForm.addEventListener("submit", (evt) => {
 
   const values = { name, date, id };
   renderTodo(values);
-  closeModal(addTodoPopupEl);
+  addTodoPopup.close();
 });
 
 initialTodos.forEach((item) => {
