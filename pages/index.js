@@ -14,7 +14,9 @@ const todosList = document.querySelector(".todos__list");
 
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
-  handleFormSubmit: () => {},
+  handleFormSubmit: (inputValues) => {
+    // move code from existing submission handler to here
+  },
 });
 addTodoPopup.setEventListeners();
 
