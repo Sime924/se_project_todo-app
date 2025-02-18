@@ -1,12 +1,12 @@
 class Todo {
   constructor(data, selector, handleCheck, handleDelete) {
-    this._completed = data._completed;
+    this._completed = data.completed;
     this._name = data.name;
     this._id = data.id;
     this._handleCheck = handleCheck;
     this._handleDelete = handleDelete;
     this._selector = selector;
-    this._date = data.Date;
+    this._date = data.date;
     this._templateElement = document.querySelector(selector);
     this._element = this._templateElement
       .cloneNode(true)
@@ -29,8 +29,8 @@ class Todo {
     this._todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
     this._todoLabel = this._todoElement.querySelector(".todo__label");
     this._todoCheckboxEl.checked = this._completed;
-    this._todoCheckboxEl.id = `todo-${this.id}`;
-    this._todoLabel.setAttribute("for", `todo-${this.id}`);
+    this._todoCheckboxEl.id = `todo-${this._id}`;
+    this._todoLabel.setAttribute("for", `todo-${this._id}`);
   }
 
   _toggleCompletion = () => {
@@ -58,13 +58,13 @@ class Todo {
       .querySelector(".todo")
       .cloneNode(true);
 
-    const todoNameEl = this._todoElement.querySelector(".todo__name");
     const todoDate = this._todoElement.querySelector(".todo__date");
+
+    const todoNameEl = this._todoElement.querySelector(".todo__name");
 
     this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
 
     todoNameEl.textContent = this._name;
-
     this._generateCheckboxEl();
     this._setEventListeners();
     this._getDueDate();
