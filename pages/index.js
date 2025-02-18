@@ -17,28 +17,45 @@ const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
-  handleFormSubmit: (inputValues) => {
-    // move code from existing submission handler to here
-  },
+  handleFormSubmit,
 });
+
+function handleFormSubmit(inputValues) {
+  const name = inputValues.name;
+  const dateInput = inputValues.date;
+
+  const date = new Date(dateInput);
+  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+
+  const id = uuidv4();
+
+  const values = { name, date, id };
+  renderTodo(values);
+  addTodoPopup.close();
+}
+
 addTodoPopup.setEventListeners();
 
+const generateTodo = (data) => {
+  const todo = new Todo(data, "#todo-template", handleCheck, handleDelete);
+  const todoElement = todo.getView();
+  return todoElement;
+};
+
+const renderTodo = (item) => {
+  const todo = generateTodo(item);
+  document.querySelector(".todos__List").append(todo);
+};
+
 const section = new Section({
-  items: [], //pass inital todos
-  renderer: () => {
-    // Generate todo item
-    // add it to the todo list
-    // refer to for each loop in this file
+  items: [initialTodos],
+  renderer: (item) => {
+    renderTodo(item);
   },
   containerSelector: ".todos__list",
 });
 
-// call section instances renderItems method
-
-const renderTodo = (item) => {
-  const todo = generateTodo(item);
-  todosList.append(todo);
-};
+section.renderItems();
 
 const openModal = (modal) => {
   modal.classList.add("popup_visible");
@@ -58,32 +75,11 @@ function handleDelete(completed) {
   }
 }
 
-const generateTodo = (data) => {
-  const todo = new Todo(data, "#todo-template", handleCheck, handleDelete);
-  const todoElement = todo.getView();
-  return todoElement;
-};
-
 addTodoButton.addEventListener("click", () => {
   addTodoPopup.open();
 });
 
-//addTodoCloseBtn.addEventListener("click", () => {
-//addTodoPopup.close();
-//});
-
-addTodoForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  const name = evt.target.name.value;
-  const dateInput = evt.target.date.value;
-
-  const date = new Date(dateInput);
-  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-
-  const id = uuidv4();
-
-  const values = { name, date, id };
-  renderTodo(values);
+addTodoCloseBtn.addEventListener("click", () => {
   addTodoPopup.close();
 });
 
