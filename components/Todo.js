@@ -8,6 +8,9 @@ class Todo {
     this._selector = selector;
     this._date = data.Date;
     this._templateElement = document.querySelector(selector);
+    this._element = this._templateElement
+      .cloneNode(true)
+      .querySelector(".todo");
   }
 
   _setEventListeners() {

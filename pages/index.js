@@ -44,7 +44,7 @@ const generateTodo = (data) => {
 
 const renderTodo = (item) => {
   const todo = generateTodo(item);
-  document.querySelector(".todos__List").append(todo);
+  document.querySelector(".todos__list").append(todo);
 };
 
 const section = new Section({
@@ -76,10 +76,12 @@ function handleDelete(completed) {
 }
 
 addTodoButton.addEventListener("click", () => {
+  console.log("add todo button clickd");
   addTodoPopup.open();
 });
 
 addTodoCloseBtn.addEventListener("click", () => {
+  console.log("close button clicked");
   addTodoPopup.close();
 });
 
