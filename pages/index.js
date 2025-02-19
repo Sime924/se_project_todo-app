@@ -30,6 +30,7 @@ function handleFormSubmit(inputValues) {
   const id = uuidv4();
 
   const values = { name, date, id };
+
   const todoItem = generateTodo(values);
   section.addItem(todoItem);
 
@@ -62,14 +63,6 @@ const section = new Section({
 
 section.renderItems();
 
-const openModal = (modal) => {
-  modal.classList.add("popup_visible");
-};
-
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
-
 function handleCheck(completed) {
   todoCounter.updateCompleted(completed);
 }
@@ -82,13 +75,7 @@ function handleDelete(completed) {
 }
 
 addTodoButton.addEventListener("click", () => {
-  console.log("add todo button clickd");
   addTodoPopup.open();
-});
-
-addTodoCloseBtn.addEventListener("click", () => {
-  console.log("close button clicked");
-  addTodoPopup.close();
 });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);

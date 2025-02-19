@@ -2,6 +2,7 @@ class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
     this._popupCloseBtn = this._popupElement.querySelector(".popup__close");
+    1;
   }
 
   _handleEscapeClose = (evt) => {
@@ -30,6 +31,11 @@ class Popup {
         this.close();
       }
     });
+    if (this._popupCloseBtn) {
+      this._popupCloseBtn.addEventListener("click", () => {
+        this.close();
+      });
+    }
   }
 }
 
