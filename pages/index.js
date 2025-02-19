@@ -30,7 +30,11 @@ function handleFormSubmit(inputValues) {
   const id = uuidv4();
 
   const values = { name, date, id };
-  renderTodo(values);
+  const todoItem = generateTodo(values);
+  section.addItem(todoItem);
+
+  todoCounter.updateTotal(true);
+  newTodoValidator.resetValidation();
   addTodoPopup.close();
 }
 
@@ -48,9 +52,10 @@ const renderTodo = (item) => {
 };
 
 const section = new Section({
-  items: [initialTodos],
+  items: initialTodos,
   renderer: (item) => {
-    renderTodo(item);
+    const element = generateTodo(item);
+    section.addItem(element);
   },
   containerSelector: ".todos__list",
 });
@@ -70,6 +75,7 @@ function handleCheck(completed) {
 }
 
 function handleDelete(completed) {
+  todoCounter.updateTotal(false);
   if (completed) {
     todoCounter.updateCompleted(false);
   }
@@ -83,10 +89,6 @@ addTodoButton.addEventListener("click", () => {
 addTodoCloseBtn.addEventListener("click", () => {
   console.log("close button clicked");
   addTodoPopup.close();
-});
-
-initialTodos.forEach((item) => {
-  renderTodo(item);
 });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
