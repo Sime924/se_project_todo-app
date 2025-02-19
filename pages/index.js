@@ -31,8 +31,7 @@ function handleFormSubmit(inputValues) {
 
   const values = { name, date, id };
 
-  const todoItem = generateTodo(values);
-  section.addItem(todoItem);
+  renderTodo(values);
 
   todoCounter.updateTotal(true);
   newTodoValidator.resetValidation();
@@ -49,15 +48,12 @@ const generateTodo = (data) => {
 
 const renderTodo = (item) => {
   const todo = generateTodo(item);
-  document.querySelector(".todos__list").append(todo);
+  section.addItem(todo);
 };
 
 const section = new Section({
   items: initialTodos,
-  renderer: (item) => {
-    const element = generateTodo(item);
-    section.addItem(element);
-  },
+  renderer: renderTodo,
   containerSelector: ".todos__list",
 });
 
